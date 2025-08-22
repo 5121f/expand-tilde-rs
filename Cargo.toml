@@ -3,8 +3,10 @@ name = "zeroten-expand-tilde"
 version = "0.1.0"
 edition = "2024"
 description = "Expanding tildes in paths"
+repository = "https://github.com/5121f/expand-tilde-rs"
 authors = ["Artyom Kalin <kalin.a.v20031@gmail.com>"]
 license = "MPL-2.0"
+readme = "README.md"
 keywords = ["path"]
 
 [features]
