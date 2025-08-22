@@ -202,12 +202,12 @@ mod test {
     #[test]
     fn test() {
         assert_eq!(
+            expand_tilde_with("~/some/dir", "/home/user"),
             PathBuf::from("/home/user/some/dir"),
-            expand_tilde_with("~/some/dir", "/home/user").into_owned()
         );
         assert_eq!(
+            expand_tilde_with("some/dir", "/home/user"),
             PathBuf::from("some/dir"),
-            expand_tilde_with("some/dir", "/home/user").into_owned()
         );
         assert_eq!(
             expand_tilde_with("~", "/home/user"),
