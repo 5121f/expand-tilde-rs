@@ -154,7 +154,7 @@ pub trait ExpandTilde: Sealed {
     /// <https://crates.io/crates/home>
     ///
     /// If you need to expand multiple paths, prefer using
-    /// [`expand_tilde_with`] with a cached home directory to avoid
+    /// [`ExpandTilde::expand_tilde_with`] with a cached home directory to avoid
     /// calling [`home_dir`] repeatedly.
     ///
     /// # Errors
