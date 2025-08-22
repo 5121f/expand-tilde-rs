@@ -4,8 +4,6 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-//! # expand-tilde
-//!
 //! Expanding tilde (`~`) into the user’s home directory.
 //!
 //! Expands `~` into the home directory: `~/file.txt` → `/home/user/file.txt`.
