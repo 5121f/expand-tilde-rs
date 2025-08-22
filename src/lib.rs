@@ -8,6 +8,11 @@
 //! Useful for working with shell-like paths such as `~/projects`.
 //! Works both as free functions and as a trait [`ExpandTilde`] on [`Path`]
 //!
+//! ## Features
+//!
+//! `compat`: use [`home`](https://crates.io/crates/home) crate for determine the home
+//! directory.
+//!
 //! ## Example
 //!
 //! ```rust
