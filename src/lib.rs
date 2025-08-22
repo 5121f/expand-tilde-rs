@@ -5,8 +5,7 @@
  */
 
 //! Expanding tilde (`~`) into the user’s home directory.
-//!
-//! Expands `~` into the home directory: `~/file.txt` → `/home/user/file.txt`.
+//! Useful for working with shell-like paths such as `~/projects`.
 //! Works both as free functions and as a trait [`ExpandTilde`] on [`Path`]
 //!
 //! ## Example
