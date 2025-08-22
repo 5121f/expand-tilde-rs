@@ -24,8 +24,6 @@
 //! println!("{}", expanded.display()); // Something like `/home/user/dir`
 //! ```
 
-#![warn(clippy::pedantic)]
-
 use std::borrow::Cow;
 use std::fmt;
 use std::path::{Path, PathBuf};

@@ -17,3 +17,6 @@ compat = ["dep:home"]
 [dependencies.home]
 version = "0.*"
 optional = true
+
+[lints.clippy]
+pedantic = "warn"
