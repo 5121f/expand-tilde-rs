@@ -1,0 +1,13 @@
+[package]
+name = "zeroten-expand-tilde"
+version = "0.1.0"
+edition = "2024"
+
+[features]
+compat = ["dep:home"]
+
+[dependencies]
+
+[dependencies.home]
+version = "0.*"
+optional = true
