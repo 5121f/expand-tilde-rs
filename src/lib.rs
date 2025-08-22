@@ -62,8 +62,14 @@ where
 
 /// Expands the leading tilde (`~`) in a path using the current user’s home directory.
 ///
-/// The home directory is resolved via [`home_dir`].
-/// If it cannot be found or is empty, returns [`HomeDirError`].
+/// By default, this uses [`std::env::home_dir()`], which is the recommended
+/// approach in modern Rust versions.
+///
+/// If the `compat` feature is enabled, the [`home`] crate is used instead.
+///
+/// For a detailed discussion of the differences and platform-specific
+/// behavior, see the [`home`] crate:
+/// <https://crates.io/crates/home>
 ///
 /// If you need to expand multiple paths, prefer using
 /// [`expand_tilde_with`] with a cached home directory to avoid
@@ -72,7 +78,7 @@ where
 /// # Errors
 ///
 /// - [`HomeDirError::NotFounded`] if the home directory cannot be determined
-/// - [`HomeDirError::Empty`] if the returned path is empty
+/// - [`HomeDirError::Empty`] if the home directory is empty
 pub fn expand_tilde<P>(path: &P) -> Result<Cow<'_, Path>, HomeDirError>
 where
     P: AsRef<Path> + ?Sized,
@@ -95,7 +101,7 @@ where
 /// # Errors
 ///
 /// - [`HomeDirError::NotFounded`] if the home directory cannot be determined
-/// - [`HomeDirError::Empty`] if the returned path is empty
+/// - [`HomeDirError::Empty`] if the home directory is empty
 pub fn home_dir() -> Result<PathBuf, HomeDirError> {
     #[cfg(feature = "compat")]
     let home_dir = home::home_dir().ok_or(HomeDirError::NotFounded)?;
@@ -138,8 +144,14 @@ pub trait ExpandTilde: Sealed {
 
     /// Expands the leading tilde (`~`) in a path using the current user’s home directory.
     ///
-    /// The home directory is resolved via [`home_dir`].
-    /// If it cannot be found or is empty, returns [`HomeDirError`].
+    /// By default, this uses [`std::env::home_dir()`], which is the recommended
+    /// approach in modern Rust versions.
+    ///
+    /// If the `compat` feature is enabled, the [`home`] crate is used instead.
+    ///
+    /// For a detailed discussion of the differences and platform-specific
+    /// behavior, see the [`home`] crate:
+    /// <https://crates.io/crates/home>
     ///
     /// If you need to expand multiple paths, prefer using
     /// [`expand_tilde_with`] with a cached home directory to avoid
@@ -148,7 +160,7 @@ pub trait ExpandTilde: Sealed {
     /// # Errors
     ///
     /// - [`HomeDirError::NotFounded`] if the home directory cannot be determined
-    /// - [`HomeDirError::Empty`] if the returned path is empty
+    /// - [`HomeDirError::Empty`] if the home directory is empty
     fn expand_tilde(&self) -> Result<Cow<'_, Path>, HomeDirError>;
 }
 
