@@ -56,10 +56,8 @@ where
     H: AsRef<Path>,
 {
     fn inner<'a>(path: &'a Path, home_dir: &Path) -> Cow<'a, Path> {
-        path.strip_prefix(TILDE).map_or_else(
-            |_| Cow::Borrowed(path),
-            |stripped| Cow::Owned(home_dir.join(stripped)),
-        )
+        path.strip_prefix(TILDE)
+            .map_or_else(|_| path.into(), |stripped| home_dir.join(stripped).into())
     }
 
     inner(path.as_ref(), home_dir.as_ref())
