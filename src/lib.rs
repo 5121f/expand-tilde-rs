@@ -168,11 +168,11 @@ pub trait ExpandTilde: Sealed {
 }
 
 impl ExpandTilde for Path {
-    fn expand_tilde_with<H: AsRef<Path>>(&self, home_dir: H) -> Cow<'_, Path> {
+    fn expand_tilde_with<H: AsRef<Self>>(&self, home_dir: H) -> Cow<'_, Self> {
         expand_tilde_with(self, home_dir)
     }
 
-    fn expand_tilde(&self) -> Result<Cow<'_, Path>> {
+    fn expand_tilde(&self) -> Result<Cow<'_, Self>> {
         expand_tilde(self)
     }
 }
@@ -190,8 +190,8 @@ pub enum HomeDirError {
 impl fmt::Display for HomeDirError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            HomeDirError::Empty => write!(f, "the home directory is empty"),
-            HomeDirError::NotFounded => write!(f, "the home directoy not founed"),
+            Self::Empty => write!(f, "the home directory is empty"),
+            Self::NotFounded => write!(f, "the home directoy not founed"),
         }
     }
 }

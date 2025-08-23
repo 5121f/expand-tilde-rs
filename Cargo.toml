@@ -18,3 +18,4 @@ optional = true
 
 [lints.clippy]
 pedantic = "warn"
+nursery = "warn"
