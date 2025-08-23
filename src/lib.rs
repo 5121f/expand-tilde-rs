@@ -82,7 +82,7 @@ where
 ///
 /// - [`HomeDirError::NotFounded`] if the home directory cannot be determined
 /// - [`HomeDirError::Empty`] if the home directory is empty
-pub fn expand_tilde<P>(path: &P) -> Result<Cow<'_, Path>, HomeDirError>
+pub fn expand_tilde<P>(path: &P) -> Result<Cow<'_, Path>>
 where
     P: AsRef<Path> + ?Sized,
 {
@@ -105,7 +105,7 @@ where
 ///
 /// - [`HomeDirError::NotFounded`] if the home directory cannot be determined
 /// - [`HomeDirError::Empty`] if the home directory is empty
-fn home_dir() -> Result<PathBuf, HomeDirError> {
+fn home_dir() -> Result<PathBuf> {
     #[cfg(feature = "compat")]
     let home_dir = home::home_dir().ok_or(HomeDirError::NotFounded)?;
 
@@ -164,7 +164,7 @@ pub trait ExpandTilde: Sealed {
     ///
     /// - [`HomeDirError::NotFounded`] if the home directory cannot be determined
     /// - [`HomeDirError::Empty`] if the home directory is empty
-    fn expand_tilde(&self) -> Result<Cow<'_, Path>, HomeDirError>;
+    fn expand_tilde(&self) -> Result<Cow<'_, Path>>;
 }
 
 impl ExpandTilde for Path {
@@ -172,7 +172,7 @@ impl ExpandTilde for Path {
         expand_tilde_with(self, home_dir)
     }
 
-    fn expand_tilde(&self) -> Result<Cow<'_, Path>, HomeDirError> {
+    fn expand_tilde(&self) -> Result<Cow<'_, Path>> {
         expand_tilde(self)
     }
 }
@@ -197,6 +197,8 @@ impl fmt::Display for HomeDirError {
 }
 
 impl std::error::Error for HomeDirError {}
+
+type Result<T> = std::result::Result<T, HomeDirError>;
 
 #[cfg(test)]
 mod test {
