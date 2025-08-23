@@ -105,7 +105,7 @@ where
 ///
 /// - [`HomeDirError::NotFounded`] if the home directory cannot be determined
 /// - [`HomeDirError::Empty`] if the home directory is empty
-pub fn home_dir() -> Result<PathBuf, HomeDirError> {
+fn home_dir() -> Result<PathBuf, HomeDirError> {
     #[cfg(feature = "compat")]
     let home_dir = home::home_dir().ok_or(HomeDirError::NotFounded)?;
 
